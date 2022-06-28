@@ -1,4 +1,8 @@
-BODY{background-color: #282c34;}
+.background{
+    width: 100vw;
+    height: calc(100vh - 228px);
+    background-color: #7D8671;
+}
 
 .titulo{
     color: #5447c2;
@@ -6,9 +10,19 @@ BODY{background-color: #282c34;}
 }
 
 .img{
-    width: 920px;
-    height: 520px;
+    width: 1024px;
+    height: 288px;
     display: block;
     margin: 0 auto;
 }
-    
+
+.card{
+    background-color: #282c34;
+    border-radius: 65px;
+    width: 65%;
+    /* padding-top: 1%;
+    padding-bottom: 1.5%; */
+    padding: 2%;
+    /* padding-right: 20px;
+    padding-left: 20px; */
+}

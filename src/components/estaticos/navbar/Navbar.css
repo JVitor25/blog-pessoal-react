@@ -1,0 +1,11 @@
+.back{
+    /* background: linear-gradient(36deg, #025727 8%, #224253, 92%); */
+    background: linear-gradient(36deg, #224253 8%,#025727 92%);
+    /*background-color: #025727; */
+}
+
+.toolbar{
+    display: flex;
+    /* justify-content: space-between; */
+    justify-content: flex-end;
+}
