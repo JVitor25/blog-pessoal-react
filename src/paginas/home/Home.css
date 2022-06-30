@@ -1,23 +1,23 @@
-.background{
-    width: 100vw;
+ .caixa{
+    width: 100vh;
     height: calc(100vh - 228px);
     background-color: #7D8671;
 }
 
 .titulo{
-    color: #5447c2;
-    text-align: center;
+    color: white !important;
+    font-weight: bold !important;
 }
 
-.img{
-    width: 1024px;
-    height: 288px;
-    display: block;
-    margin: 0 auto;
+.botao{
+    border-color: white !important;
+    background-color: #025727 !important;
+    color: white !important;
 }
 
 .card{
     background-color: #282c34;
+    color: white;
     border-radius: 65px;
     width: 65%;
     /* padding-top: 1%;
@@ -25,4 +25,8 @@
     padding: 2%;
     /* padding-right: 20px;
     padding-left: 20px; */
+}
+
+.postagens{
+    background-color: white;
 }

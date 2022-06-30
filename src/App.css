@@ -32,7 +32,12 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.visualizacao {
+  height: calc(100vh - 228px);
 }
