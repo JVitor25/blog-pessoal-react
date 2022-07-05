@@ -39,6 +39,6 @@
 }
 
 .visualizacao {
-  height: calc(100vh - 228px);
-  /* height: 100vh; */
+  /* height: calc(100vh - 228px); */
+  height: 100vh;
 }
