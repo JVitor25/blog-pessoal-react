@@ -7,27 +7,27 @@ import { cadastroUsuario } from "../../services/Service";
 import "./CadastroUsuario.css";
 
 function CadastroUsuario() {
-    let history = useNavigate();
+    let navigate = useNavigate();
     const [confirmarSenha, setConfirmarSenha] = useState<String>("")
     const [user, setUser] = useState<User>(
         {
             id: 0,
-            nome: '',
-            usuario: '',
-            senha: ''
+            nome: "",
+            usuario: "",
+            senha: ""
         })
 
     const [userResult, setUserResult] = useState<User>(
         {
             id: 0,
-            nome: '',
-            usuario: '',
-            senha: ''
+            nome: "",
+            usuario: "",
+            senha: ""
         })
 
     useEffect(() => {
         if (userResult.id !== 0) {
-            history("/login")
+            navigate("/login")
         }
     }, [userResult])
 
@@ -45,9 +45,9 @@ function CadastroUsuario() {
         e.preventDefault()
         if (confirmarSenha === user.senha) {
             cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
-            alert('Usuario cadastrado com sucesso.')
+            alert("Usuario cadastrado com sucesso.")
         } else {
-            alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
+            alert("Dados inconsistentes. Favor verificar as informações de cadastro.")
         }
     }
 
