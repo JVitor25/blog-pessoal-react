@@ -36,9 +36,9 @@ function Login() {
         e.preventDefault();
         try{
             await login(`/usuarios/logar`, userLogin, setToken)
-            alert("Usuário Logado com sucesso");
+            alert("Usuário logado com sucesso");
         }catch(erro){
-            alert('Dados usuários incosistentes. Erro ao logar!');
+            alert("Dados usuários incosistentes. Erro ao logar!");
         }
     }
 
