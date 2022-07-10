@@ -1,3 +1,11 @@
 .titulo{
     font-weight: bold;
 }
+
+.barraTab{
+    background-color: #0b3027c0 !important;
+} 
+
+.fundo{
+    background-color: #edffd600;
+}

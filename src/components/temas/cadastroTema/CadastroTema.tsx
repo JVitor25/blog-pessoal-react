@@ -1,16 +1,19 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
 import { Container, Typography, TextField, Button } from "@material-ui/core";
 import { useNavigate, useParams } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
 import Tema from "../../../models/Tema"
 import { buscaId, post, put } from '../../../services/Service';
 import "./CadastroTema.css";
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 
 function CadastroTema() {
   let navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
-  const [token, setToken] = useLocalStorage('token')
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+  );
   const [temas, setTemas] = useState<Tema>({
     id: 0,
     descricao: ""
@@ -36,7 +39,7 @@ function CadastroTema() {
     })
   }
 
-  function updatedTema(e: ChangeEvent<HTMLInputElement>){
+  function updatedTema(e: ChangeEvent<HTMLInputElement>) {
     setTemas({
       ...temas,
       [e.target.name]: e.target.value,
@@ -46,7 +49,7 @@ function CadastroTema() {
   async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()
     console.log("tema " + JSON.stringify(temas))
-    if(id !== undefined){
+    if (id !== undefined) {
       console.log(temas)
       put(`/temas`, temas, setTemas, {
         headers: {
@@ -54,7 +57,7 @@ function CadastroTema() {
         }
       })
       alert('Tema atualizado com sucesso');
-    }else{
+    } else {
       post(`/temas`, temas, setTemas, {
         headers: {
           'Authorization': token
@@ -65,7 +68,7 @@ function CadastroTema() {
     back()
   }
 
-  function back(){
+  function back() {
     navigate("/temas")
   }
 

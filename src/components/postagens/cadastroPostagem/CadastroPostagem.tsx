@@ -1,17 +1,20 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Button, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core';
-import "./CadastroPostagem.css"
 import { useNavigate, useParams } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
 import Tema from '../../../models/Tema';
 import Postagem from '../../../models/Postagem';
 import { busca, buscaId, post, put } from '../../../services/Service';
+import "./CadastroPostagem.css"
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 function CadastroPostagem() {
   let navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [temas, setTemas] = useState<Tema[]>([])
-  const [token, setToken] = useLocalStorage('token');
+  const token = useSelector<TokenState, TokenState["tokens"]>(
+    (state) => state.tokens
+  );
 
   useEffect(() => {
     if (token === "") {
@@ -31,13 +34,14 @@ function CadastroPostagem() {
     id: 0,
     titulo: '',
     texto: '',
-    tema: null
+    data: '',
+    tema: null,
   })
 
   useEffect(() => {
     setPostagens({
       ...postagens,
-      tema: tema
+      tema: tema,
     })
   }, [tema])
 
@@ -57,7 +61,7 @@ function CadastroPostagem() {
   }
 
   async function findByIdPostagem(id: string) {
-    await buscaId(`postagens/${id}`, setPostagens, {
+    await buscaId(`/postagens/${id}`, setPostagens, {
       headers: {
         'Authorization': token
       }
@@ -75,25 +79,36 @@ function CadastroPostagem() {
   }
 
   async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault()
+    e.preventDefault();
 
     if (id !== undefined) {
-      put(`/postagens`, postagens, setPostagens, {
-        headers: {
-          'Authorization': token
-        }
-      })
-      alert('Postagem atualizada com sucesso');
+      try {
+        await put(`/postagens`, postagens, setPostagens, {
+          headers: {
+            'Authorization': token,
+          },
+        });
+        alert('Postagem atualizada com sucesso');
+      } catch (error) {
+        console.log(`Ocorreu o seguinte erro: ${error}`);
+        alert('Falha ao atualizar a postagem');
+      }
+
     } else {
-      post(`/postagens`, postagens, setPostagens, {
-        headers: {
-          'Authorization': token
-        }
-      })
-      alert('Postagem cadastrada com sucesso');
+      try {
+        await post(`/postagens`, postagens, setPostagens, {
+          headers: {
+            'Authorization': token,
+          },
+        });
+        alert('Postagem cadastrada com sucesso');
+      } catch (error) {
+        console.log(`Ocorreu o seguinte erro: ${error}`);
+        alert('Falha ao criar a postagem');
+      }
+
     }
     back()
-
   }
 
   function back() {
@@ -112,7 +127,7 @@ function CadastroPostagem() {
           <Select
             labelId="demo-simple-select-helper-label"
             id="demo-simple-select-helper"
-            onChange={(e) => buscaId(`/tema/${e.target.value}`, setTema, {
+            onChange={(e) => buscaId(`/temas/${e.target.value}`, setTema, {
               headers: {
                 'Authorization': token
               }

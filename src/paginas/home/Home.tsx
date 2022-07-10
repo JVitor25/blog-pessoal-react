@@ -4,19 +4,22 @@ import { Box } from "@mui/material"
 import TabPostagem from "../../components/postagens/tabpostagem/TabPostagem"
 import "./Home.css";
 import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem';
-import { useNavigate } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../store/tokens/tokensReducer';
 
 function Home() {
     let navigate = useNavigate();
-    const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    );
     useEffect(() => {
-        if (token == "") {
-          alert("Você precisa estar logado")
-          navigate("/login")
-    
+        if (token === "") {
+            alert("Você precisa estar logado")
+            navigate("/login")
+
         }
-      }, [token])
+    }, [token])
     return (
         <>
             <Grid container direction="row" justifyContent="center" alignItems="center" className="caixa">
@@ -28,9 +31,11 @@ function Home() {
                         </Box>
                         <Box display="flex" justifyContent="center">
                             <Box marginRight={1}>
-                                <ModalPostagem/>
+                                <ModalPostagem />
                             </Box>
-                            <Button variant="outlined" className='botao'>Ver Postagens</Button>
+                            <Link to="/postagens">
+                                <Button variant="outlined" className='botao'>Ver Postagens</Button>
+                            </Link>
                         </Box>
                     </Box>
                 </Grid>
@@ -39,7 +44,7 @@ function Home() {
                         <img src="https://i.pinimg.com/564x/58/25/07/582507fc7426bda9c04c367942047170.jpg" alt="Imagem de uma Árvore." className="imagemHome" />
                     </Box>
                 </Grid>
-                <Grid xs={12} className="postagens">
+                <Grid xs={12} className="postagens" style={{ backgroundColor: "#7D8671" }}>
                     <TabPostagem />
                 </Grid>
 

@@ -13,19 +13,19 @@ function TabPostagem() {
     return (
         <>
             <TabContext value={value}>
-                <AppBar position="static">
+                <AppBar position="static" className="barraTab">
                     <Tabs centered indicatorColor="secondary" onChange={handleChange}>
-                        <Tab label="Todas as postagens" value="1" />
-                        <Tab label="Sobre-nós" value="2" />
+                        <Tab label="Todas as postagens" value="1" className="titulo"/>
+                        <Tab label="Sobre-nós" value="2" className="titulo"/>
                     </Tabs>
                 </AppBar>
                 <TabPanel value="1" >
-                    <Box display="flex" flexWrap="wrap" justifyContent="center">
+                    <Box display="flex" flexWrap="wrap" justifyContent="center" className="fundo">
                         <ListaPostagem />
                     </Box>
                 </TabPanel>
                 <TabPanel value="2">
-                    <Typography variant="h5" gutterBottom color="textPrimary" component="h5" align="center" className="titulo">Sobre-nós</Typography>
+                    <Typography variant="h5" gutterBottom color="textPrimary" component="h5" align="center" className="titulo ">Sobre-nós</Typography>
                     <Typography variant="body1" gutterBottom color="textPrimary" align="justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde quia explicabo amet pariatur reprehenderit fugit. Quam maiores ducimus soluta natus sequi magnam maxime deserunt ab cumque, suscipit facilis, voluptatem eum.</Typography>
                 </TabPanel>
             </TabContext>

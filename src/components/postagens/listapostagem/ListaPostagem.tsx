@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Card, CardActions, CardContent, Button, Typography } from "@material-ui/core"
+import { Card, CardActions, CardContent, Button, Typography, Grid } from "@material-ui/core"
 import { alertClasses, Box } from "@mui/material"
 import './ListaPostagem.css';
 import Postagem from '../../../models/Postagem';
-import useLocalStorage from 'react-use-localstorage';
 import { busca } from '../../../services/Service';
+import { useSelector } from 'react-redux';
+import { TokenState } from '../../../store/tokens/tokensReducer';
 
 function ListaPostagem() {
     const [postagens, setPostagens] = useState<Postagem[]>([])
-    const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+        (state) => state.tokens
+    );
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -35,7 +38,7 @@ function ListaPostagem() {
         <>
             {
                 postagens.map(postagem => (
-                    <Box m={2} >
+                    <Box margin={2}>
                         <Card variant="outlined">
                             <CardContent>
                                 <Typography color="textSecondary" gutterBottom>Postagens</Typography>
@@ -45,12 +48,12 @@ function ListaPostagem() {
                             </CardContent>
                             <CardActions>
                                 <Box display="flex" justifyContent="center" mb={1.5}>
-                                    <Link to={`/formularioPostagem`} className="text-decorator-none" >
+                                    <Link to={`/formularioPostagem/${postagem.id}`} className="text-decorator-none" >
                                         <Box mx={1}>
                                             <Button variant="contained" className="marginLeft" size='small' color="primary">atualizar</Button>
                                         </Box>
                                     </Link>
-                                    <Link to={`/deletarPostagem`} className="text-decorator-none">
+                                    <Link to={`/deletarPostagem/${postagem.id}`} className="text-decorator-none">
                                         <Box mx={1}>
                                             <Button variant="contained" size='small' color="secondary">deletar</Button>
                                         </Box>
