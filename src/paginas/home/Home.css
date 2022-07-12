@@ -1,8 +1,6 @@
  .caixa{
     width: 100vh;
-    /* height: calc(100vh - 228px); */
-    height: 100vh;
-    background-color: #7D8671;
+    height: 100vh
 }
 
 .titulo{
@@ -32,8 +30,4 @@
     width: 374px ;
     height: 526px ;
     border-radius: 65px;
-}
-
-.postagens{
-    background-color: white;
 }

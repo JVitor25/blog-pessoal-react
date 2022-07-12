@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Card, CardActions, CardContent, Button, Typography, Grid } from "@material-ui/core"
-import { alertClasses, Box } from "@mui/material"
+import { Box } from "@mui/material"
 import './ListaPostagem.css';
 import Postagem from '../../../models/Postagem';
 import { busca } from '../../../services/Service';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import { toast } from 'react-toastify';
 
 function ListaPostagem() {
     const [postagens, setPostagens] = useState<Postagem[]>([])
@@ -17,7 +18,16 @@ function ListaPostagem() {
 
     useEffect(() => {
         if (token === '') {
-            alert("Você presica estar logado!")
+            toast.error("Voce precisa estar logado", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined
+            });
             navigate("/login")
         }
     }, [token])

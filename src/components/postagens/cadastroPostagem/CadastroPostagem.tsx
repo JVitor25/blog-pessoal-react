@@ -7,6 +7,7 @@ import { busca, buscaId, post, put } from '../../../services/Service';
 import "./CadastroPostagem.css"
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
+import { toast } from 'react-toastify';
 
 function CadastroPostagem() {
   let navigate = useNavigate();
@@ -18,7 +19,16 @@ function CadastroPostagem() {
 
   useEffect(() => {
     if (token === "") {
-      alert("Você precisa estar logado")
+      toast.error("Voce precisa estar logado", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "colored",
+        progress: undefined
+      });
       navigate("/login")
 
     }
@@ -88,10 +98,28 @@ function CadastroPostagem() {
             'Authorization': token,
           },
         });
-        alert('Postagem atualizada com sucesso');
+        toast.success("Postagem atualizada com sucesso", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined
+        });
       } catch (error) {
         console.log(`Ocorreu o seguinte erro: ${error}`);
-        alert('Falha ao atualizar a postagem');
+        toast.warning("Falha ao atualizar a postagem", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined
+        });
       }
 
     } else {
@@ -101,10 +129,28 @@ function CadastroPostagem() {
             'Authorization': token,
           },
         });
-        alert('Postagem cadastrada com sucesso');
+        toast.success("Postagem cadastrada com sucesso", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined
+        });
       } catch (error) {
         console.log(`Ocorreu o seguinte erro: ${error}`);
-        alert('Falha ao criar a postagem');
+        toast.warning("Falha ao criar a postagem", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          theme: "colored",
+          progress: undefined
+        });
       }
 
     }

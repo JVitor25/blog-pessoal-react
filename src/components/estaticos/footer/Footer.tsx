@@ -14,7 +14,7 @@ function Footer() {
 
     var footerComponent;
 
-    if (token != "") {
+    if (token !== "") {
         footerComponent = <Grid container direction="row" justifyContent="center" alignItems="center">
             <Grid alignItems="center" item xs={12}>
                 <Box className="box1">
